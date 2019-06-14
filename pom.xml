@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.tu.springFramework</groupId>
+  <artifactId>springFramework</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>springFramework</name>
+
+  <modules>
+     <module>common</module>
+     <module>config</module>
+     <module>curd</module>
+     <module>dubbo</module>
+     <module>dubboServer</module>
+     <module>mq</module>
+     <module>redis</module>
+     <module>service</module>
+     <module>webapp</module>
+  </modules>
+
+
+  <properties>
+    <!--spring 版本-->
+    <spring.version>4.3.5.RELEASE</spring.version>
+    <!--mysql数据库连接-->
+    <mysql.version>5.1.38</mysql.version>
+    <oracel.version>10.2.0.3.0</oracel.version>
+    <!--mybatis版本-->
+    <mybatis.version>3.2.6</mybatis.version>
+    <!--spring整合mybatis-->
+    <mybatis.spring>1.2.2</mybatis.spring>
+    <!--alibaba 数据库连接池-->
+    <druid.version>1.0.15</druid.version>
+    <!--httpclient版本-->
+    <httpclient.version>4.3.5</httpclient.version>
+    <!--logback.xml所需要的jar-->
+    <slf4j.version>1.7.25</slf4j.version>
+    <logback.version>1.2.3</logback.version>
+    <logback-ext-spring.version>0.1.4</logback-ext-spring.version>
+    <!--freemark-->
+    <freemark.verson>2.3.23</freemark.verson>
+    <!--alibaba-fastjson-->
+    <fastjson.version>1.1.41</fastjson.version>
+    <!--jackson-->
+    <jackson.version>2.7.4</jackson.version>
+
+    <!--servlet相关-->
+    <servlet.version>2.5</servlet.version>
+
+    <!--文件上传组件-->
+    <common-io.version>2.4</common-io.version>
+    <common-fileupload.version>1.3.1</common-fileupload.version>
+    <common-codec.version>1.9</common-codec.version>
+
+    <!--redis 版本-->
+    <redis.version>2.9.0</redis.version>
+    <spring.redis.version>1.8.4.RELEASE</spring.redis.version>
+    <commons-pool2.version>2.4.2</commons-pool2.version>
+
+    <!--mybatis 二级缓存-->
+    <mybatis-ehcache.version>1.0.2</mybatis-ehcache.version>
+    <ehcache-core.version>2.6.10</ehcache-core.version>
+
+    <!---分页-->
+    <pageHelp.version>4.1.6</pageHelp.version>
+
+    <!--aop-->
+    <aspectjrt.version>1.8.10</aspectjrt.version>
+    <aspectjweaver.version>1.8.10</aspectjweaver.version>
+
+    <commons-lang3.version>3.4</commons-lang3.version>
+
+    <!--shiro相关jar-->
+    <shiro-core.version>1.4.0</shiro-core.version>
+    <shiro-spring.version>1.4.0</shiro-spring.version>
+    <shiro-cas.version>1.4.0</shiro-cas.version>
+    <shiro-ehcache.version>1.4.0</shiro-ehcache.version>
+    <shiro-web.verison>1.4.0</shiro-web.verison>
+
+    <!--spring集成kafka-->
+    <spring-kafka.version>1.3.0.RELEASE</spring-kafka.version>
+    <kafka-clients.version>1.0.1</kafka-clients.version>
+    <kafka-streams.version>0.10.1.0</kafka-streams.version>
+    <spring-integration-kafka.version>1.3.0.RELEASE</spring-integration-kafka.version>
+
+    <!--mongodb-->
+    <mongodb.version>3.2.2</mongodb.version>
+    <spring-data-mongodb.version>2.0.9.RELEASE</spring-data-mongodb.version>
+
+    <!--dubbo-->
+    <dubbo.version>2.5.3</dubbo.version>
+    <zookeeper.version>3.4.7</zookeeper.version>
+    <zkclient.version>0.1</zkclient.version>
+  </properties>
+
+  <dependencies>
+    <!-- Spring 相关jar-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-oxm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+
+    <!-- aop -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${aspectjrt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>${aspectjweaver.version}</version>
+    </dependency>
+
+    <!--mysql数据库连接-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+
+    <!--oracle数据库连接-->
+    <!-- <dependency>
+         <groupId>com.oracle</groupId>
+         <artifactId>ojdbc6</artifactId>
+         <version>11.2.0.1.0</version>
+     </dependency>-->
+
+    <!--mybatis-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+    <!--spring整合mybatis-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${mybatis.spring}</version>
+    </dependency>
+
+    <!--分页-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>${pageHelp.version}</version>
+    </dependency>
+
+    <!-- logback jar -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <!--关于spring整合日志的-->
+    <dependency>
+      <groupId>org.logback-extensions</groupId>
+      <artifactId>logback-ext-spring</artifactId>
+      <version>${logback-ext-spring.version}</version>
+    </dependency>
+
+    <!-- httpclient -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
+    </dependency>
+    <!--alibaba 数据库连接池-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>${druid.version}</version>
+    </dependency>
+
+    <!--freemark-->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>${freemark.verson}</version>
+    </dependency>
+
+    <!-- 格式化对象，方便输出日志 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
+
+    <!--转换json作用-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <!--文件上传组件-->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>${common-fileupload.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${common-io.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${common-codec.version}</version>
+    </dependency>
+
+    <!--HttpServlet相关-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--redis jar-->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>${redis.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+      <version>${spring.redis.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+      <version>${commons-pool2.version}</version>
+    </dependency>
+
+    <!--mybatis 二级缓存所需要的jar 二级缓存由mybaits-ehcache 和ehcache-core实现分布式二级缓存-->
+    <dependency>
+      <groupId>org.mybatis.caches</groupId>
+      <artifactId>mybatis-ehcache</artifactId>
+      <version>${mybatis-ehcache.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache-core</artifactId>
+      <version>${ehcache-core.version}</version>
+    </dependency>
+
+    <!--shiro 集成spring-->
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-core</artifactId>
+      <version>${shiro-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-spring</artifactId>
+      <version>${shiro-spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-web</artifactId>
+      <version>${shiro-web.verison}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-ehcache</artifactId>
+      <version>${shiro-ehcache.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+
+
+    <!--kafka start-->
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>${kafka-clients.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-streams</artifactId>
+      <version>${kafka-streams.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+      <version>${spring-kafka.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.kafka</groupId>
+          <artifactId>kafka-clients</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-kafka</artifactId>
+      <version>${spring-integration-kafka.version}</version>
+    </dependency>
+
+    <!-- <dependency>
+         <groupId>org.springframework.kafka</groupId>
+         <artifactId>spring-kafka</artifactId>
+         <version>2.1.4.RELEASE</version>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.kafka</groupId>
+         <artifactId>kafka-clients</artifactId>
+         <version>1.0.0</version>
+     </dependency>-->
+
+
+    <!--mongodb-->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>${mongodb.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-mongodb</artifactId>
+      <version>${spring-data-mongodb.version}</version>
+    </dependency>
+
+
+    <!-- dubbo相关 要吧dubbo默认的spring移除，不然项目启动不成功-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>dubbo</artifactId>
+      <version>${dubbo.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>${zookeeper.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.sgroschupf</groupId>
+      <artifactId>zkclient</artifactId>
+      <version>${zkclient.version}</version>
+    </dependency>
+
+    <!--向logstash发送数据-->
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>5.2</version>
+    </dependency>
+  </dependencies>
+
+
+  <build>
+    <finalName>webapp</finalName>
+      <!--编译之后包含xml-->
+      <resources>
+        <resource>
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.properties</include>
+            <include>**/*.xml</include>
+          </includes>
+          <!-- 是否替换资源中的属性-->
+          <filtering>false</filtering>
+        </resource>
+
+        <resource>
+          <directory>src/main/resources</directory>
+          <!--
+              <includes> <include>**/*.properties</include>
+              <include>**/*.xml</include>
+               </includes> <filtering>true</filtering>
+          -->
+        </resource>
+
+      <resource>
+        <directory>src/main/resources</directory>
+        <!-- 资源根目录排除各环境的配置，使用单独的资源目录来指定 -->
+        <excludes>
+          <exclude>profiles/local/**</exclude>
+          <exclude>profiles/prod/**</exclude>
+          <exclude>profiles/test/**</exclude>
+        </excludes>
+      </resource>
+
+      <resource>
+        <directory>src/main/resources/profiles/${profiles.active}</directory>
+      </resource>
+
+    </resources>
+  </build>
+
+
+
+  <profiles>
+    <profile>
+      <id>local</id>
+      <properties>
+        <profiles.active>local</profiles.active>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>test</id>
+      <properties>
+        <profiles.active>test</profiles.active>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <profiles.active>prod</profiles.active>
+      </properties>
+    </profile>
+  </profiles>
+</project>

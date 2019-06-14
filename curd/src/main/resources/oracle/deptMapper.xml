@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tu.curd.dao.DeptDao" >
+    <resultMap id="DeptResultMap" type="com.tu.curd.model.Dept" >
+        <result column="DEPTNO" property="deptNo" javaType="String" jdbcType="VARCHAR" />
+        <result column="DNAME" property="dName" javaType="String" jdbcType="VARCHAR" />
+        <result column="LOC" property="loc" javaType="String" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+
+    <select id="selectOne" resultMap="DeptResultMap" parameterType="com.tu.curd.model.Dept">
+        select * from DEPT where deptNo = #{deptNo}
+    </select>
+
+
+
+</mapper>

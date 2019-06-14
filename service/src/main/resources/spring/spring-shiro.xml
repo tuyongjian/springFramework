@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 装配 securityManager -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 配置登陆页面 这里要写controller地址或者webapp下面的地址-->
+        <property name="loginUrl" value="/shiro/shiro-login.html"/>
+        <!-- 登陆成功后的一面 value 是controller地址-->
+        <property name="successUrl" value="/shiro/success.html"/>
+        <!-- 认证未通过访问的页面，即经过认证但是没有相应的权限时跳转的页面 -->
+        <property name="unauthorizedUrl" value="/shiro/error.html"/>
+        <property name="filters">
+            <map>
+                <!--退出过滤器-->
+                <entry key="logout" value-ref="systemLogoutFilter" />
+            </map>
+        </property>
+        <!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截.  -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- 配置登出: 使用 logout 过滤器 authc 认证 roles授权 admin是角色-->
+                /shiro/shiro-logout.json=logout
+                /user/index.html=authc
+                /user/index.html=roles[admin]
+            </value>
+        </property>
+    </bean>
+
+    <bean id="systemLogoutFilter" class="com.tu.common.filter.SystemLogoutFilter">
+        <property name="redirectUrl" value="/shiro/login"/>
+    </bean>
+
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="MyRealm"/>
+    </bean>
+
+    <!-- 自定义Realm -->
+    <bean id="MyRealm" class="com.tu.service.shiro.MyRealm" init-method="setCredentialMatcher">
+    </bean>
+
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- 开启Shiro注解 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.tu" />
+    <!-- 引入配置文件 这里有一个很坑爹的问题，
+    因为spring-redis.xml文件也是通过这个方法读取配置文件的，PropertyPlaceholderConfigurer
+    方法在生成第一个文件的时候就不会再次读取第二个文件，所以要加ignoreUnresolvablePlaceholders这个
+    参数，同时不能加id 不然也会报错-->
+   <!-- <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:profiles/local/jdbc.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>-->
+
+
+    <bean id="dataSourceMysql" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <property name="testWhileIdle" value="true" />
+        <!-- 这里建议配置为TRUE，防止取到的连接不可用 -->
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 这里配置提交方式，默认就是TRUE，可以不用配置 -->
+        <property name="defaultAutoCommit" value="true" />
+        <!-- 验证连接有效与否的SQL，不同的数据配置不同 这里之前是使用mysql数据库，没有出现问题
+        后面测试oracle数据库时，报找不到from关键字，注释掉就可以了-->
+        <property name="validationQuery" value="select 1 " />
+        <property name="filters" value="stat" />
+    </bean>
+
+
+    <bean id="dataSourceOracle" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc-oracle.driver}" />
+        <property name="url" value="${jdbc-oracle.url}" />
+        <property name="username" value="${jdbc-oracle.username}" />
+        <property name="password" value="${jdbc-oracle.password}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <property name="minIdle" value="${jdbc-oracle.minIdle}" />
+        <property name="maxActive" value="${jdbc-oracle.maxActive}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${jdbc-oracle.maxWait}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <property name="testWhileIdle" value="true" />
+        <!-- 这里建议配置为TRUE，防止取到的连接不可用 -->
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="false" />
+        <!-- 这里配置提交方式，默认就是TRUE，可以不用配置 -->
+        <property name="defaultAutoCommit" value="true" />
+        <!-- 验证连接有效与否的SQL，不同的数据配置不同 -->
+        <property name="validationQuery" value="select 1 from dual " />
+        <property name="filters" value="stat" />
+    </bean>
+
+    <!-- 编写spring 配置文件的配置多数源映射关系 -->
+    <bean class="com.tu.common.databaseUtil.DynamicDataSource" id="dynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry value-ref="dataSourceMysql" key="dataSourceMysql"></entry>
+                <entry value-ref="dataSourceOracle" key="dataSourceOracle"></entry>
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="dataSourceMysql"></property>
+    </bean>
+
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--数据源配置-->
+        <property name="dataSource" ref="dynamicDataSource" />
+        <!--二级缓存配置 这里配置的是全局配置，如果要具体用的话，还要在某个具体的mapper.xml进行相应的配置-->
+        <property name="configurationProperties">
+            <props>
+                <prop key="cacheEnabled">${mybatis.cacheEnabled}</prop>
+            </props>
+        </property>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations">
+            <array>
+                <value>classpath*:/mysql/*.xml</value>
+                <value>classpath*:/oracle/*.xml</value>
+            </array>
+        </property>
+    </bean>
+
+
+    <bean id="baseDaoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"
+          abstract="true" lazy-init="true">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--配置扫描包的路径，如果要扫描多个包，中间使用逗号隔-->
+        <property name="basePackage" value="com.tu.curd.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dynamicDataSource" />
+    </bean>
+</beans>

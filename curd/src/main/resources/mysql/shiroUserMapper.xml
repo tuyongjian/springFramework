@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tu.curd.dao.ShiroUserDao" >
+    <resultMap id="ShiroUserResultMap" type="com.tu.curd.model.ShiroUser" >
+        <id column="id" property="id" javaType="int" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" javaType="String" jdbcType="VARCHAR" />
+        <result column="password" property="password" javaType="String" jdbcType="VARCHAR" />
+        <result column="is_delete" property="isDelete" javaType="String" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <collection property="shiroUserRoles" ofType="com.tu.curd.model.ShiroUserRole">
+            <result column="user_id" property="userId" javaType="int" jdbcType="INTEGER"/>
+            <result column="role_id" property="roleId" javaType="int" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id" parameterType="com.tu.curd.model.ShiroUser">
+        insert into shiro_user(
+            user_name,
+            password,
+            is_delete,
+            create_time,
+            update_time
+        )values(
+              #{userName, javaType=String, jdbcType=VARCHAR},
+              #{password, javaType=String, jdbcType=VARCHAR},
+              #{isDelete, javaType=String,jdbcType=VARCHAR},
+              #{createTime, javaType=java.sql.Timestamp ,jdbcType=TIMESTAMP},
+              #{updateTime, javaType=java.sql.Timestamp, jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <select id="selectOne" parameterType="com.tu.curd.model.ShiroUser" resultMap="ShiroUserResultMap">
+        select * from shiro_user
+        <where>
+            <if test="id !=null and id!='' ">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="userName !=null and userName!='' ">
+                and user_name = #{userName,jdbcType=INTEGER}
+            </if>
+            <if test="password !=null and password!='' ">
+                and password = #{password,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="ShiroUserResultMap">
+        select * from shiro_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectUserAndRole" parameterType="map" resultMap="ShiroUserResultMap">
+
+        select *, userRole.id userRoleId
+        from shiro_user shiroUser
+        left JOIN shiro_user_role userRole
+        on shiroUser.id = userRole.user_id
+        where shiroUser.id = #{id,jdbcType=INTEGER}
+
+    </select>
+
+    <update id="update" parameterType="com.tu.curd.model.ShiroUser">
+        update shiro_user
+        <set>
+            <if test="userName!=null and userName!='' ">
+                user_name = #{userName, javaType=String, jdbcType=VARCHAR},
+            </if>
+            <if test="password!=null and password!='' ">
+                password = #{password, javaType=String, jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete!=null and isDelete!='' ">
+                is_delete = #{isDelete, javaType=String, jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime!=null and updateTime!='' ">
+                update_time = #{updateTime, javaType=java.sql.Timestamp ,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+        <if test="userName!=null and userName!='' ">
+            and  user_name = #{userName, javaType=String, jdbcType=VARCHAR}
+        </if>
+    </update>
+
+    <delete id="delete" parameterType="map" >
+        delete from shiro_user
+         where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+
+
+
+</mapper>
