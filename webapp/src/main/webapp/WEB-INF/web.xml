@@ -18,10 +18,10 @@
   </context-param>
 
   <!--指定运行的环境 如果本地运行的话，在 vm中设置 -Dspring.profiles.active=XXX来设置-->
-  <!--<context-param>
+  <context-param>
     <param-name>spring.profiles.active</param-name>
     <param-value>local</param-value>
-  </context-param>-->
+  </context-param>
 
   <!-- 加载logback.xml配置文件 -->
   <context-param>
