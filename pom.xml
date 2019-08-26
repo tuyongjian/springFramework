@@ -442,7 +442,7 @@
         <profiles.active>local</profiles.active>
       </properties>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
     </profile>
     <profile>
@@ -456,44 +456,16 @@
       <properties>
         <profiles.active>prod</profiles.active>
       </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
     </profile>
   </profiles>
 
 
   <build>
-    <finalName>springFramework</finalName>
-      <!--编译之后包含xml-->
-      <resources>
-        <resource>
-          <directory>src/main/java</directory>
-          <includes>
-            <include>**/*.properties</include>
-            <include>**/*.xml</include>
-          </includes>
-          <!-- 是否替换资源中的属性-->
-          <filtering>false</filtering>
-        </resource>
+    <plugins>
 
-        <resource>
-          <directory>src/main/resources</directory>
-            <includes>
-              <include>**/*.properties</include>
-              <include>**/*.xml</include>
-              </includes>
-            <filtering>true</filtering>
-        </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <!-- 资源根目录排除各环境的配置，使用单独的资源目录来指定 -->
-        <excludes>
-          <exclude>profiles/local/**</exclude>
-          <exclude>profiles/prod/**</exclude>
-          <exclude>profiles/test/**</exclude>
-        </excludes>
-      </resource>
-      <resource>
-        <directory>src/main/resources/profiles/${profiles.active}</directory>
-      </resource>
-    </resources>
+    </plugins>
   </build>
 </project>

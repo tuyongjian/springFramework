@@ -17,10 +17,21 @@
     </param-value>
   </context-param>
 
-  <!--指定运行的环境 如果本地运行的话，在 vm中设置 -Dspring.profiles.active=XXX来设置-->
+  <!--springProfiles指定运行的环境 如果本地运行的话，放开下面的配置或则
+  在 vm中设置 -Dspring.profiles.active=XXX来设置
+  在打包发布的时候，下面这段注释掉，由服务器配置发布的环境 ，可以再tomcat的setenv文件中
+  指定当前环境，但是这样会有一个文件，就是每次都要去修改这个web.xml,不够灵活，所有可以和
+  mavenprofiles结合，动态来指定当前环境，${profiles.active}就是指定的mavenProfiles当前环境，
+  在 打包的时候可以使用 clean install -P XXX (XXX 即为环境，这里还需要一个plugin:maven-war-plugin)
+  -->
+<!--  <context-param>
+    <param-name>spring.profiles.default</param-name>
+    <param-value>local</param-value>
+  </context-param>-->
+
   <context-param>
     <param-name>spring.profiles.active</param-name>
-    <param-value>local</param-value>
+    <param-value>${profiles.active}</param-value>
   </context-param>
 
   <!-- 加载logback.xml配置文件 -->
