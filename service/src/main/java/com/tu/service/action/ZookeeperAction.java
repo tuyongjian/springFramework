@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @Description
  * @Classname Zookeeper
@@ -36,16 +38,16 @@ public class ZookeeperAction extends BaseController {
         String data2 = "";
         if (this.zookeeperServer.isConnected()){
              path1Data = this.zookeeperServer.exists("/path1");
-             path2Data = this.zookeeperServer.exists("/path2");
+             path2Data = this.zookeeperServer.exists("/path4");
             if(path1Data==null){
                 this.zookeeperServer.createEphemeralNode("/path1","test1");
             }
             if(path2Data==null){
-                this.zookeeperServer.createEphemeralSequentialNode("/path2","test2");
+                this.zookeeperServer.createEphemeralSequentialNode("/path4","test2");
             }
 
             data1 = this.zookeeperServer.getData("/path1");
-            data2 = this.zookeeperServer.getData("/path2");
+           // data2 = this.zookeeperServer.getData("/path20000000080");
         }
 
         Result result = new Result();
@@ -110,5 +112,20 @@ public class ZookeeperAction extends BaseController {
 
         return result;
     }
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "getAllNode",method = RequestMethod.POST)
+    public Result getAllNode() throws Exception {
+        zookeeperServer.getZooKeeper();
+        Result result = new Result();
+        if (this.zookeeperServer.isConnected()){
+             List<String> list =  this.zookeeperServer.getChildren("/");
+            result.setData(list);
+        }
+        return result;
+    }
+
 
 }
