@@ -40,8 +40,10 @@ public class ZookeeperServerImpl implements IZookeeperServer {
     * */
     public ZooKeeper getZooKeeper() throws Exception {
         try {
-            zooKeeper = new ZooKeeper(connectionString, sessionTimeout, this, false);
-            isConnection =true;
+            if(zooKeeper==null){
+                zooKeeper = new ZooKeeper(connectionString, sessionTimeout, this, false);
+                isConnection =true;
+            }
         } catch (IOException e) {
             throw new Exception("Create Zookeeper Exception : " + e);
         }

@@ -32,6 +32,7 @@ public class ZookeeperAction extends BaseController {
     @RequestMapping(value = "getData",method = RequestMethod.POST)
     public Result getData() throws Exception {
             zookeeperServer.getZooKeeper();
+
         Stat path1Data = null;
         Stat path2Data = null;
         String data1 = "";
@@ -49,10 +50,8 @@ public class ZookeeperAction extends BaseController {
             data1 = this.zookeeperServer.getData("/path1");
            // data2 = this.zookeeperServer.getData("/path20000000080");
         }
-
         Result result = new Result();
         result.setData("data1--:"+data1+"data2--:"+data2);
-
         return result;
     }
 
