@@ -27,10 +27,10 @@ public class zkCuratorService {
     static CuratorFramework curatorFramework;
     @Value("${zookeeper-connection-url}")
     private  String ZK_URL = "";
-    static  {
+    /*static  {
         curatorFramework= CuratorFrameworkFactory.newClient("120.55.49.58:2181",new ExponentialBackoffRetry(1000,3));
         curatorFramework.start();
-    }
+    }*/
 
 
     /**

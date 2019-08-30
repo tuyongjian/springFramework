@@ -307,6 +307,13 @@
       <version>${commons-pool2.version}</version>
     </dependency>
 
+    <!--redisson 分布式redis 锁的jar-->
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson</artifactId>
+      <version>3.3.2</version>
+    </dependency>
+
     <!--mybatis 二级缓存所需要的jar 二级缓存由mybaits-ehcache 和ehcache-core实现分布式二级缓存-->
     <dependency>
       <groupId>org.mybatis.caches</groupId>
