@@ -43,6 +43,12 @@
         from USER
     </select>
 
+    <select id="queryUserByPage" resultMap="UserResultMap" useCache="true">
+        select *from USER
+    </select>
+
+
+
 
     <select id="procedure" resultType="int" statementType="CALLABLE">
         call sp_name()

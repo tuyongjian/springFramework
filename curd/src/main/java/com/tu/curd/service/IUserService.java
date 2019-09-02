@@ -2,6 +2,8 @@ package com.tu.curd.service;
 
 import com.tu.curd.model.User;
 
+import java.util.List;
+
 /**
  * Created by tuyongjian on 2019/1/6.
  */
@@ -16,4 +18,6 @@ public interface IUserService {
     int queryCount();
 
     int procedure();
+
+    List<User> queryUserByPage();
 }

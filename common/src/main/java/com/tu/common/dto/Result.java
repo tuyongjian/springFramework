@@ -40,6 +40,19 @@ public class Result {
         this.result = result;
     }
 
+    public Result(boolean success, String message, Object data) {
+        this.success = success;
+        this.message = message;
+        this.data = data;
+    }
+
+    public Result(boolean success, String message, String result, Object data) {
+        this.success = success;
+        this.message = message;
+        this.result = result;
+        this.data = data;
+    }
+
     public boolean isSuccess() {
         return success;
     }

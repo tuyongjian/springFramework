@@ -1,6 +1,9 @@
 package com.tu.service.action;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tu.common.controller.BaseController;
+import com.tu.common.dto.PageResult;
 import com.tu.common.dto.Result;
 import com.tu.curd.model.User;
 import com.tu.curd.service.IUserService;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by tuyongjian on 2019/1/6.
@@ -100,5 +104,25 @@ public class UserAction extends BaseController{
         user.setRemark("测试update");
         userService.updateUser(user);
         return new Result(true,"更新成功");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "queryByPage",method = RequestMethod.POST)
+    public Result queryByPage(ModelMap model){
+
+        PageHelper.startPage(1, 3, true);
+        List<User> users = this.userService.queryUserByPage();
+
+        PageInfo<User> pageInfo = new PageInfo<User>(users);
+
+        PageResult<User> pageResult = new PageResult<User>();
+
+        pageResult.setTotalPages(pageInfo.getPages());
+        pageResult.setTotal(pageInfo.getTotal());
+        pageResult.setLastPage(pageInfo.getLastPage());
+        pageResult.setList(users);
+
+
+        return new Result(true,"查询成功",pageResult);
     }
 }

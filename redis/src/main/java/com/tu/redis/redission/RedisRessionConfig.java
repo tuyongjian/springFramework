@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2019/8/30 15:50
  * @Created by tuyongjian
  */
-@Configuration
+//@Configuration
 public class RedisRessionConfig {
 
     @Bean(destroyMethod = "shutdown")

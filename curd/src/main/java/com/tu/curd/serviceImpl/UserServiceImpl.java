@@ -6,6 +6,8 @@ import com.tu.curd.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by tuyongjian on 2019/1/6.
  */
@@ -17,6 +19,10 @@ public class UserServiceImpl implements IUserService {
 
     public User queryUser(int id) {
         return userDao.selectUser(id);
+    }
+
+    public List<User> queryUserByPage() {
+        return userDao.queryUserByPage();
     }
 
     public int addUser(User user) {

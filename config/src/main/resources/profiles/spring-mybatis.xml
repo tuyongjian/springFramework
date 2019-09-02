@@ -108,6 +108,8 @@
                 <value>classpath*:/oracle/*.xml</value>
             </array>
         </property>
+        <!--加载mybatis全局配置文件，以及分页配置文件-->
+        <property name="configLocation" value="classpath:/profiles/mybatis-config.xml"/>
     </bean>
 
 
