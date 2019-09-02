@@ -33,7 +33,7 @@ public class RedissionAction {
     public Result getData() throws Exception {
         Result result = new Result();
         //启动一百个线程同时去抢占cpu，有可能产生并发
-        int count = 10;
+        int count = 100;
         //利用发令枪操作
         CountDownLatch countDownLatch = new CountDownLatch(count);
         for (int i = 0; i < count; i++) {
