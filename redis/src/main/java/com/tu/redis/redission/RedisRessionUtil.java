@@ -21,7 +21,7 @@ public class RedisRessionUtil {
 
     private Logger logger = LoggerFactory.getLogger(RedisRessionUtil.class);
 
-   // @Autowired
+    //@Autowired
     private RedissonClient redissonClient;
 
 

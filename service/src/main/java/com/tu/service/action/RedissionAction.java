@@ -28,6 +28,15 @@ public class RedissionAction {
     @Autowired
     RedisRessionUtil redisRessionUtil ;
 
+    @RequestMapping(value = "test",method = RequestMethod.GET)
+    public String test(){
+        Result result = new Result(true,"TEST");
+        logger.info("测试ELK again[{}]",result.toString());
+         this.redisRessionUtil.setString("aa","aa");
+       // logger.info("查询redis结果为---------[{}]",user.toString());
+        return "error/403";
+    }
+
     @ResponseBody
     @RequestMapping(value = "getData",method = RequestMethod.POST)
     public Result getData() throws Exception {
