@@ -22,7 +22,7 @@
 
 
     <!--redis连接池参数-->
-    <bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <!--<bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.maxIdle}"/>
         <property name="minIdle" value="${redis.minIdle}"/>
         <property name="maxTotal" value="${redis.maxTotal}"/>
@@ -34,17 +34,17 @@
         <property name="testWhileIdle" value="${redis.testWhileIdle}"/>
     </bean>
 
-    <!--spring redis 连接池管理工厂配置-->
+    &lt;!&ndash;spring redis 连接池管理工厂配置&ndash;&gt;
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="poolConfig" ref="redisPoolConfig"/>
         <property name="hostName" value="${redis.host}"/>
         <property name="port" value="${redis.port}"/>
-       <!-- <property name="password" value="${redis.password}"/>-->
+       &lt;!&ndash; <property name="password" value="${redis.password}"/>&ndash;&gt;
         <property name="timeout" value="${redis.timeout}"/>
         <property name="usePool" value="${redis.userPool}"/>
     </bean>
 
-    <!--redis template 定义-->
+    &lt;!&ndash;redis template 定义&ndash;&gt;
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory"/>
         <property name="keySerializer">
@@ -59,20 +59,20 @@
         <property name="hashValueSerializer">
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"></bean>
         </property>
-        <!--开启事务-->
+        &lt;!&ndash;开启事务&ndash;&gt;
        <property name="enableTransactionSupport" value="true"/>
     </bean>
 
-    <!-- 对string template 操作的封装 -->
+    &lt;!&ndash; 对string template 操作的封装 &ndash;&gt;
     <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
         <constructor-arg ref="jedisConnectionFactory" />
-        <!-- 开启REIDS事务支持 -->
+        &lt;!&ndash; 开启REIDS事务支持 &ndash;&gt;
         <property name="enableTransactionSupport" value="false" />
     </bean>
 
-    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+    &lt;!&ndash;自定义redis工具类,在需要缓存的地方注入此类  &ndash;&gt;
     <bean id="redisrCacheManager" class="com.tu.redis.RedisCacheUtil">
         <property name="redisTemplate" ref="redisTemplate" />
-    </bean>
+    </bean>-->
 
 </beans>
