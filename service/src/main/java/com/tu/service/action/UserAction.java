@@ -54,6 +54,7 @@ public class UserAction extends BaseController{
     public String test(){
         Result result = new Result(true,"TEST");
         logger.info("测试ELK again[{}]",result.toString());
+        this.redisCacheUtil.set("user","tuyongjian");
         Object user =  this.redisCacheUtil.get("user");
         logger.info("查询redis结果为---------[{}]",user.toString());
         return "error/403";

@@ -16,7 +16,7 @@ public class RedisManagerUtil {
             JedisPoolConfig config = new JedisPoolConfig();
             // 控制一个pool可分配多少个jedis实例，通过pool.getResource()来获取；
             // 如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
-            config.setMaxTotal(Integer.valueOf(10));
+            config.setMaxTotal(Integer.valueOf(1000));
             // 控制一个pool最多有多少个状态为idle(空闲的)的jedis实例。
             config.setMaxIdle(Integer.valueOf(20));
             // 表示当borrow(引入)一个jedis实例时，最大的等待时间，如果超过等待时间，则直接抛出JedisConnectionException；
@@ -28,9 +28,9 @@ public class RedisManagerUtil {
             String master = "mymaster";
             //setinel客户端提供了master自动发现功能
             Set<String> sentinels = new HashSet<String>();
-            sentinels.add("127.0.0.1:26379");
-            sentinels.add("127.0.0.1:26380");
-            sentinels.add("127.0.0.1:26381");
+            sentinels.add("192.168.190.131:26379");
+            sentinels.add("192.168.190.131:26380");
+            sentinels.add("192.168.190.131:26381");
 
             pool = new JedisSentinelPool(master, sentinels, config);
         } catch (Exception e) {
