@@ -3,7 +3,7 @@
     <!-- 尽量别用绝对路径，如果带参数不同容器路径解释可能不同,以下配置参数在pom.xml里 -->
     <property name="log.root.level" value="DEBUG" /> <!-- 日志级别 -->
     <property name="log.other.level" value="ERROR" /> <!-- 其他日志级别 -->
-    <property name="log.base" value="${catalina.base}" />
+    <property name="log.base" value="/opt/logs" />
     <property name="log.moduleName" value="HelloWorld" />  <!-- 模块名称， 影响日志配置名，日志文件名 -->
     <property name="log.max.size" value="20MB" /> <!-- 日志文件大小 -->
 
@@ -19,7 +19,7 @@
         <File>${log.base}/${log.moduleName}.log</File><!-- 设置日志不超过${log.max.size}时的保存路径，注意如果 是web项目会保存到Tomcat的bin目录 下 -->
         <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${log.base}/logs/${log.moduleName}_all_%d{yyyy-MM-dd}.%i.log.zip
+            <FileNamePattern>${log.base}/${log.moduleName}_all_%d{yyyy-MM-dd}.%i.log.zip
             </FileNamePattern>
             <!-- 当天的日志大小 超过${log.max.size}时,压缩日志并保存 -->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">

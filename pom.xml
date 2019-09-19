@@ -16,7 +16,7 @@
      <module>config</module>
      <module>curd</module>
      <module>dubbo</module>
-    <!-- <module>dubboServer</module>-->
+     <module>dubboServer</module>
      <module>mq</module>
      <module>redis</module>
      <module>service</module>
