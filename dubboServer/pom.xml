@@ -54,7 +54,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>webapp</finalName>
+        <finalName>dubboServer</finalName>
         <resources>
             <!--编译之后包含xml-->
             <resource>
