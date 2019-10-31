@@ -45,7 +45,7 @@
     <!--freemark-->
     <freemark.verson>2.3.23</freemark.verson>
     <!--alibaba-fastjson-->
-    <fastjson.version>1.1.41</fastjson.version>
+    <fastjson.version>1.2.25</fastjson.version>
     <!--jackson-->
     <jackson.version>2.7.4</jackson.version>
 
