@@ -133,6 +133,8 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
+
+    <!--aop-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
@@ -157,7 +159,7 @@
     </dependency>
 
 
-    <!-- aop -->
+    <!--aspectj -->
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
