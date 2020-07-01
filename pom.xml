@@ -28,7 +28,7 @@
     <!--spring 版本-->
     <spring.version>4.3.5.RELEASE</spring.version>
     <!--mysql数据库连接-->
-    <mysql.version>5.1.38</mysql.version>
+    <mysql.version>8.0.16</mysql.version>
     <oracel.version>10.2.0.3.0</oracel.version>
     <!--mybatis版本-->
     <mybatis.version>3.2.6</mybatis.version>
