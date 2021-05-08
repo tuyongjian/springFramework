@@ -76,7 +76,7 @@
     <commons-lang3.version>3.4</commons-lang3.version>
 
     <!--shiro相关jar-->
-    <shiro-core.version>1.4.0</shiro-core.version>
+    <shiro-core.version>1.6.0</shiro-core.version>
     <shiro-spring.version>1.4.0</shiro-spring.version>
     <shiro-cas.version>1.4.0</shiro-cas.version>
     <shiro-ehcache.version>1.4.0</shiro-ehcache.version>
