@@ -37,7 +37,7 @@
     <!--alibaba 数据库连接池-->
     <druid.version>1.0.15</druid.version>
     <!--httpclient版本-->
-    <httpclient.version>4.3.5</httpclient.version>
+    <httpclient.version>4.5.13</httpclient.version>
     <!--logback.xml所需要的jar-->
     <slf4j.version>1.7.25</slf4j.version>
     <logback.version>1.2.3</logback.version>
