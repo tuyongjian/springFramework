@@ -26,7 +26,7 @@
 
   <properties>
     <!--spring 版本-->
-    <spring.version>4.3.5.RELEASE</spring.version>
+    <spring.version>5.3.19</spring.version>
     <!--mysql数据库连接-->
     <mysql.version>5.1.38</mysql.version>
     <oracel.version>10.2.0.3.0</oracel.version>
