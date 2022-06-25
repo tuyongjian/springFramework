@@ -90,7 +90,7 @@
 
     <!--mongodb-->
     <mongodb.version>3.2.2</mongodb.version>
-    <spring-data-mongodb.version>2.0.9.RELEASE</spring-data-mongodb.version>
+    <spring-data-mongodb.version>3.3.5</spring-data-mongodb.version>
 
     <!--dubbo-->
     <dubbo.version>2.5.3</dubbo.version>
