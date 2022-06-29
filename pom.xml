@@ -94,7 +94,7 @@
 
     <!--dubbo-->
     <dubbo.version>2.5.3</dubbo.version>
-    <zookeeper.version>3.4.6</zookeeper.version>
+    <zookeeper.version>3.4.14</zookeeper.version>
     <zkclient.version>0.1</zkclient.version>
   </properties>
 
