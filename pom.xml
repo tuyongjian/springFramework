@@ -47,7 +47,7 @@
     <!--alibaba-fastjson-->
     <fastjson.version>1.1.41</fastjson.version>
     <!--jackson-->
-    <jackson.version>2.7.4</jackson.version>
+    <jackson.version>2.12.6.1</jackson.version>
 
     <!--servlet相关-->
     <servlet.version>2.5</servlet.version>
